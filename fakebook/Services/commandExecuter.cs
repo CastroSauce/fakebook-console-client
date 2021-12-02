@@ -19,7 +19,11 @@ namespace fakebook.Services
         {
             _userService = new UserService(_httpService);
             _postService = new PostService(_httpService);
+
+            _httpService.HealthCheck();
         }
+
+
 
         public async Task executeCommand(CommandRequest commandRequest)
         {

@@ -12,7 +12,7 @@ namespace fakebook.Services
 {
     class HttpService
     {
-        private const string host = "https://localhost:44322";
+        private const string host = "https://localhost:5001";
         private HttpClient client = new();
         private string authToken = "";
 
@@ -40,6 +40,9 @@ namespace fakebook.Services
             return await client.GetAsync($"{host}{path}?{requestParams}");
         }
 
+
+
+
         public async Task<bool> login(string username)
         {
 
@@ -54,6 +57,15 @@ namespace fakebook.Services
             return true;
         }
 
+        public async Task<bool> HealthCheck()
+        {
+            var response = await Get("/Authentication/health");
+
+            Console.WriteLine(response.IsSuccessStatusCode ? "Api was detected" : "Api was not detected");
+
+
+            return response.IsSuccessStatusCode;
+        }
 
 
 
